@@ -1,0 +1,2 @@
+insert into convidado (nome, qtd) values ('Eddy', 2), ('Cake', 3), ('Jeffy', 1);
+insert into festa (nome, fdate) values ('The End', TO_DATE('17/12/2015', 'DD/MM/YYYY')), ('RPG', TO_DATE('31/12/5420', 'DD/MM/YYYY'));

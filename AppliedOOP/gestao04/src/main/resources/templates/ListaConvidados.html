@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Convidados</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Lista de convidados</h1>
+		</div>
+		<div class="panel-body">
+			<form class="form-inline" method="POST" 
+			 th:object="${convidado}" th:action="@{/convidados}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<input type="text" name="qtd" class="form-control" th:field="*{qtd}" placeholder="Acompanhantes">
+					<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+				</div>
+			</form>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Acompanhantes</th>
+						<th rowspan=2>Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c: ${convidados}" >
+						<td th:text="${c.nome}">nome</td>
+						<td th:text="${c.qtd}">qtd</td>
+						<td><a class="glyphicon glyphicon-trash" th:href="@{/convidados/excluir/}+${c.id}">Excluir</a></td>
+						<td><a class="glyphicon glyphicon-pencil" th:href="@{/convidados/alterar/}+${c.id}">Alterar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
