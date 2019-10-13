@@ -8,40 +8,19 @@ import javax.persistence.Id;
 @Entity
 public class Convidado 
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	private int qtd;
 	private String nome;
 	
 	//Get-Set
-	public long getId() 
-	{
-		return id;
-	}
-	public void setId(long id) 
-	{
-		this.id = id;
-	}
+	public long getId() { return id; }
+	public void setId(long id) { this.id = id; }
 	
-	public int getQtd() 
-	{
-		return qtd;
-	}
-	public void setQtd(int qtd) 
-	{
-		this.qtd = qtd;
-	}
+	public int getQtd() { return qtd; }
+	public void setQtd(int qtd) { this.qtd = qtd; }
 	
-	public String getNome() 
-	{
-		return nome;
-	}
-	public void setNome(String nome) 
-	{
-		this.nome = nome;
-	}
-	
-	
+	public String getNome() { return nome; }
+	public void setNome(String nome) { this.nome = nome; }
 }

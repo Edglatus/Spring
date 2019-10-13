@@ -14,42 +14,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Festa 
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE) @DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date fdate;
 	private String nome;
 	
 	//Get-Set
-	public long getId() 
-	{
-		return id;
-	}
-	public void setId(long id) 
-	{
-		this.id = id;
-	}
+	public long getId() { return id; }
+	public void setId(long id) { this.id = id; }
 	
-	public Date getFdate() 
-	{
-		return fdate;
-	}
-	public void setFdate(Date fDate) 
-	{
-		this.fdate = fDate;
-	}
+	public Date getFdate() { return fdate; }
+	public void setFdate(Date fDate) { this.fdate = fDate; }
 	
-	public String getNome() 
-	{
-		return nome;
-	}
-	public void setNome(String nome) 
-	{
-		this.nome = nome;
-	}
-	
-	
+	public String getNome() { return nome; }
+	public void setNome(String nome) { this.nome = nome; }
 }

@@ -4,7 +4,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gestao.models.Festa;
 
-public interface Festas extends JpaRepository<Festa, Long>
-{
-	
-}
+public interface Festas extends JpaRepository<Festa, Long>{}
