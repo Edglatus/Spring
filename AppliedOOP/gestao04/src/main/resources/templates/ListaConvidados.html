@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Lista de Convidados</title>
-<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-	rel="stylesheet" />
-<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
-	rel="stylesheet" />
-</head>
-<body>
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
 			<h1 class="panel-title">Lista de convidados</h1>
@@ -44,5 +38,4 @@
 			</table>
 		</div>
 	</div>
-</body>
-</html>
+</section>
