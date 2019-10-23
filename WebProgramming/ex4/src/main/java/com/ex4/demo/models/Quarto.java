@@ -1,5 +1,7 @@
 package com.ex4.demo.models;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +23,7 @@ public class Quarto
 	private int numeroDoQuarto;
 	
 	@OneToMany(cascade=CascadeType.PERSIST) @JoinColumn(name="fk_quarto")
-	private Cama camas;
+	private List<Cama> camas;
 	
 	//Get-Set
 	public long getId() { return id; }
@@ -35,8 +37,8 @@ public class Quarto
 	public int getNumeroDoQuarto() { return numeroDoQuarto; }
 	public void setNumeroDoQuarto(int num) { this.numeroDoQuarto = num; }
 	
-	public Cama getCamas() { return camas; }
-	public void setCamas(Cama camas) { this.camas = camas; }
+	public List<Cama> getCamas() { return camas; }
+	public void setCamas(List<Cama> camas) { this.camas = camas; }
 	
 	//Methods
 	public boolean verificarDisponibilidade() { return isOcupado; }

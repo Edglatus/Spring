@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,14 +24,13 @@ public abstract class Pessoa
 	private String nome;
 	private String rg;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	//Change to JoinTable?
-		@JoinColumn(name="fk_end") ..
+	@OneToOne(cascade=CascadeType.ALL) @JoinColumn(name="fk_end")
 	private Endereco endereco;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	//Change to JoinTable?
-	@JoinColumn(name="fk_tel") ..
+	@JoinTable(name="pessoa_telefone",
+				joinColumns=@JoinColumn(name="id_pessoa"),
+				inverseJoinColumns=@JoinColumn(name="id_telefone"))
 	private List<Telefone> telefones;
 	
 	@ManyToMany(mappedBy="pessoas")
@@ -47,5 +47,4 @@ public abstract class Pessoa
 	public void setRg(String rg) { this.rg = rg; }
 	
 	//get-set hoteis
-		..
 }
