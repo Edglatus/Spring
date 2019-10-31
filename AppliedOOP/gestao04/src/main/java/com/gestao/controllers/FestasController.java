@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gestao.models.Festa;
-import com.gestao.repository.Festas;
+import com.gestao.repository.FestaRepository;
 
 @Controller
 public class FestasController 
 {
 	@Autowired
-	Festas festa;
+	FestaRepository festa;
 	
 	@GetMapping("festas")
 	public ModelAndView getFestas()

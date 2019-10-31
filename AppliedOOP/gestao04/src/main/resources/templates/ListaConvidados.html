@@ -16,6 +16,9 @@
 					<input type="hidden" name="id" th:field="*{id}">
 					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
 					<input type="text" name="qtd" class="form-control" th:field="*{qtd}" placeholder="Acompanhantes">
+					<select name="festa" class="form-control" th:field="*{festa}">
+						<option th:each="f:${festas}" th:value="${f.id}" th:text="${f.nome}"></option>
+					</select>
 					<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
 				</div>
 			</form>
@@ -24,6 +27,7 @@
 					<tr>
 						<th>Nome</th>
 						<th>Acompanhantes</th>
+						<th>Festa</th>
 						<th rowspan=2>Ações</th>
 					</tr>
 				</thead>
@@ -31,6 +35,7 @@
 					<tr th:each="c: ${convidados}" >
 						<td th:text="${c.nome}">nome</td>
 						<td th:text="${c.qtd}">qtd</td>
+						<td th:text="${c.festa.nome}">festa</td>
 						<td><a class="glyphicon glyphicon-trash" th:href="@{/convidados/excluir/}+${c.id}">Excluir</a></td>
 						<td><a class="glyphicon glyphicon-pencil" th:href="@{/convidados/alterar/}+${c.id}">Alterar</a></td>
 					</tr>
