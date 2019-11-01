@@ -5,18 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gestao.models.Jogador;
 import com.gestao.repository.JogadorRepository;
 
-@Controller
+@Controller @RequestMapping("jogadores")
 public class JogadorController 
 {
 	@Autowired
 	private JogadorRepository jogadores;
 	
-	@GetMapping("jogadores")
+	@GetMapping()
 	public ModelAndView getJogadores()
 	{
 		ModelAndView mv = new ModelAndView("ListaJogadores.html");
@@ -27,21 +28,21 @@ public class JogadorController
 		return mv;
 	}
 	
-	@PostMapping("jogadores")
+	@PostMapping()
 	public String addJogador(Jogador c)
 	{
 		this.jogadores.save(c);
 		return("redirect:/jogadores");
 	}
 	
-	@GetMapping("jogadores/excluir/{id}")
+	@GetMapping("/excluir/{id}")
 	public String delJogador(@PathVariable long id)
 	{
 		this.jogadores.deleteById(id);;
 		return("redirect:/jogadores");
 	}
 	
-	@GetMapping("jogadores/alterar/{id}")
+	@GetMapping("/alterar/{id}")
 	public ModelAndView altJogadores(@PathVariable long id)
 	{
 		ModelAndView mv = new ModelAndView("ListaJogadores.html");

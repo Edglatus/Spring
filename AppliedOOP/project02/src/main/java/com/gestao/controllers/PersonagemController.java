@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gestao.models.Personagem;
@@ -13,7 +14,7 @@ import com.gestao.repository.ClasseRepository;
 import com.gestao.repository.JogadorRepository;
 import com.gestao.repository.PersonagemRepository;
 
-@Controller
+@Controller @RequestMapping("personagens")
 public class PersonagemController 
 {
 	@Autowired
@@ -25,7 +26,7 @@ public class PersonagemController
 	@Autowired
 	private CampanhaRepository campanhas;
 	
-	@GetMapping("personagens")
+	@GetMapping()
 	public ModelAndView getPersonagens()
 	{
 		ModelAndView mv = new ModelAndView("ListaPersonagens.html");
@@ -39,21 +40,21 @@ public class PersonagemController
 		return mv;
 	}
 	
-	@PostMapping("personagens")
+	@PostMapping()
 	public String addPersonagem(Personagem c)
 	{
 		this.personagens.save(c);
 		return("redirect:/personagens");
 	}
 	
-	@GetMapping("personagens/excluir/{id}")
+	@GetMapping("/excluir/{id}")
 	public String delPersonagem(@PathVariable long id)
 	{
 		this.personagens.deleteById(id);;
 		return("redirect:/personagens");
 	}
 	
-	@GetMapping("personagens/alterar/{id}")
+	@GetMapping("/alterar/{id}")
 	public ModelAndView altPersonagens(@PathVariable long id)
 	{
 		ModelAndView mv = new ModelAndView("ListaPersonagens.html");

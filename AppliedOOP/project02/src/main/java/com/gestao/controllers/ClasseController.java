@@ -5,18 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gestao.models.Classe;
 import com.gestao.repository.ClasseRepository;
 
-@Controller
+@Controller @RequestMapping("classes")
 public class ClasseController 
 {
 	@Autowired
 	private ClasseRepository classes;
 	
-	@GetMapping("classes")
+	@GetMapping()
 	public ModelAndView getClasses()
 	{
 		ModelAndView mv = new ModelAndView("ListaClasses.html");
@@ -27,21 +28,21 @@ public class ClasseController
 		return mv;
 	}
 	
-	@PostMapping("classes")
+	@PostMapping()
 	public String addClasse(Classe c)
 	{
 		this.classes.save(c);
 		return("redirect:/classes");
 	}
 	
-	@GetMapping("classes/excluir/{id}")
+	@GetMapping("/excluir/{id}")
 	public String delClasse(@PathVariable long id)
 	{
 		this.classes.deleteById(id);;
 		return("redirect:/classes");
 	}
 	
-	@GetMapping("classes/alterar/{id}")
+	@GetMapping("/alterar/{id}")
 	public ModelAndView altClasses(@PathVariable long id)
 	{
 		ModelAndView mv = new ModelAndView("ListaClasses.html");

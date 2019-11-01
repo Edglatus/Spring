@@ -1,4 +1,4 @@
-package com.gestao.controllers;
+package com.gestao.controllers.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,62 +14,62 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gestao.models.Campanha;
-import com.gestao.repository.CampanhaRepository;
+import com.gestao.models.Classe;
+import com.gestao.repository.ClasseRepository;
 
 @RestController
-@RequestMapping("/api/campanhas")
-public class CampanhaAPI {
+@RequestMapping("/api/classes")
+public class ClasseAPI {
 	
 	@Autowired
-	private CampanhaRepository campanhas;
+	private ClasseRepository classes;
 	
 	//Create
 	@PostMapping
-	public ResponseEntity<?> saveFesta(Campanha festa) {
-	     return new ResponseEntity<Campanha> (campanhas.save(festa), HttpStatus.OK);
+	public ResponseEntity<?> saveClasse(Classe entity) {
+	     return new ResponseEntity<Classe> (classes.save(entity), HttpStatus.OK);
 	}
 	
 	//Read
 	@GetMapping
-	public List<Campanha> getAllCampanhas(){ return this.campanhas.findAll(); }
+	public List<Classe> getAllClasses(){ return this.classes.findAll(); }
 	@GetMapping("/{id}")
-	public Optional<Campanha> getFesta(@PathVariable("id") Long id)
+	public Optional<Classe> getClasse(@PathVariable("id") Long id)
 	{
-		return this.campanhas.findById(id);
+		return this.classes.findById(id);
 	}
 
 	//Update
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateFesta(@PathVariable("id") Long id, Campanha festa) 
+	public ResponseEntity<?> updateClasse(@PathVariable("id") Long id, Classe entity) 
 	{
-		Optional<Campanha> c = campanhas.findById(id);
+		Optional<Classe> c = classes.findById(id);
 		
 		if (!c.isPresent()) 
 		{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		if(festa.getId() != id)
+		if(entity.getId() != id)
 		{
 			return new ResponseEntity<> (HttpStatus.BAD_REQUEST);
 		}
 		
-		campanhas.save(festa);
-		return new ResponseEntity<Campanha>(campanhas.save(festa), HttpStatus.OK);
+		classes.save(entity);
+		return new ResponseEntity<Classe>(classes.save(entity), HttpStatus.OK);
 	}
 	
 	//Delete
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteFesta(@PathVariable("id") Long id) 
+	public ResponseEntity<?> deleteClasse(@PathVariable("id") Long id) 
 	{
-		Optional<Campanha> c = campanhas.findById(id);
+		Optional<Classe> c = classes.findById(id);
 		
 		if (c == null) 
 		{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		campanhas.deleteById(id);
+		classes.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

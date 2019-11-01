@@ -1,4 +1,4 @@
-package com.gestao.controllers;
+package com.gestao.controllers.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,62 +14,62 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gestao.models.Jogador;
-import com.gestao.repository.JogadorRepository;
+import com.gestao.models.Campanha;
+import com.gestao.repository.CampanhaRepository;
 
 @RestController
-@RequestMapping("/api/jogadores")
-public class JogadorAPI {
+@RequestMapping("/api/campanhas")
+public class CampanhaAPI {
 	
 	@Autowired
-	private JogadorRepository jogadores;
+	private CampanhaRepository campanhas;
 	
 	//Create
 	@PostMapping
-	public ResponseEntity<?> saveConvidado(Jogador convidado) {
-	     return new ResponseEntity<Jogador> (jogadores.save(convidado), HttpStatus.OK);
+	public ResponseEntity<?> saveCampanha(Campanha entity) {
+	     return new ResponseEntity<Campanha> (campanhas.save(entity), HttpStatus.OK);
 	}
 	
 	//Read
 	@GetMapping
-	public List<Jogador> getAllJogadores(){ return this.jogadores.findAll(); }
+	public List<Campanha> getAllCampanhas(){ return this.campanhas.findAll(); }
 	@GetMapping("/{id}")
-	public Optional<Jogador> getConvidado(@PathVariable("id") Long id)
+	public Optional<Campanha> getCampanha(@PathVariable("id") Long id)
 	{
-		return this.jogadores.findById(id);
+		return this.campanhas.findById(id);
 	}
 
 	//Update
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateConvidado(@PathVariable("id") Long id, Jogador convidado) 
+	public ResponseEntity<?> updateCampanha(@PathVariable("id") Long id, Campanha entity) 
 	{
-		Optional<Jogador> c = jogadores.findById(id);
+		Optional<Campanha> c = campanhas.findById(id);
 		
 		if (!c.isPresent()) 
 		{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		if(convidado.getId() != id)
+		if(entity.getId() != id)
 		{
 			return new ResponseEntity<> (HttpStatus.BAD_REQUEST);
 		}
 		
-		jogadores.save(convidado);
-		return new ResponseEntity<Jogador>(jogadores.save(convidado), HttpStatus.OK);
+		campanhas.save(entity);
+		return new ResponseEntity<Campanha>(campanhas.save(entity), HttpStatus.OK);
 	}
 	
 	//Delete
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteConvidado(@PathVariable("id") Long id) 
+	public ResponseEntity<?> deleteCampanha(@PathVariable("id") Long id) 
 	{
-		Optional<Jogador> c = jogadores.findById(id);
+		Optional<Campanha> c = campanhas.findById(id);
 		
 		if (c == null) 
 		{
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		jogadores.deleteById(id);
+		campanhas.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
