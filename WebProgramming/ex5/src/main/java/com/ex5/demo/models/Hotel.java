@@ -11,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQuery(name="Hotel.findTipoQuarto", 
+	query="SELECT new com.ex5.demo.dto.TipoQuarto(COUNT(q.camas), q.tipo) FROM Hotel h JOIN h.quartos q WHERE h.id = ?1")
 public class Hotel 
 {
 	//Attributes

@@ -12,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name="Reserva.findByIDs", 
+	query="SELECT r FROM Reserva r JOIN r.cliente c JOIN r.funcionario f JOIN r.quartos q WHERE c.id = ?1 AND f.id = ?2 AND q.id = ?3")
 public class Reserva 
 {
 	//Attributes
@@ -48,6 +51,4 @@ public class Reserva
 	
 	public List<Quarto> getQuartos() { return quartos; }
 	public void setQuartos(List<Quarto> quartos) { this.quartos = quartos; }
-	
-	
 }

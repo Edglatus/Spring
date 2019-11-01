@@ -3,9 +3,11 @@ package com.ex5.demo.models;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@Entity
+@Entity 
+@NamedQuery(name="Cliente.getReservas", query="SELECT COUNT(r.id) FROM Cliente c JOIN c.Reservas r WHERE c.id = ?1")
 public class Cliente extends Pessoa
 {
 	//Attributes
