@@ -8,9 +8,10 @@
 		<version>2.1.8.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.festas</groupId>
+	<groupId>com.rpg</groupId>
+	<artifactId>rpgManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>project01</name>
+	<name>project02</name>
 	<description>Nondescript</description>
 
 	<properties>
@@ -67,5 +68,4 @@
 		</plugins>
 	</build>
 
-	<artifactId>festas</artifactId>
 </project>
