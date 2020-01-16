@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Lista de Clientes</h1>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th/>
+						<th>Nome</th>
+						<th>Data de Nascimento</th>
+						<th rowspan=2>Endereço</th>
+						<th/>
+						<th>Telefone</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c: ${clientes}" >
+						<td> <img height=45px th:src="${c.foto}"/> </td>
+						<td th:text="${c.nome}">nome</td>
+						<td th:text="${#dates.format(c.dtNasc, 'dd/MM/yyyy')}">data</td>
+						<td th:text="${c.endereco.rua}">rua</td>						
+						<td th:text="${c.endereco.numero}">data</td>
+						<td th:each="t: ${c.telefones}" th:text="${t.numero}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

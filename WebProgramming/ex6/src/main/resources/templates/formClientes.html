@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Cadastrar Cliente</h1>
+		</div>
+		<div class="card-body">
+			<form class="form" method="POST" enctype="multipart/form-data"
+			 th:object="${cliente}" th:action="@{/cliente/cadastrar}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<input type="date" name="dtNasc" class="form-control" th:field="*{dtNasc}" placeholder="Data de Nascimento">
+				</div>
+				<hr class="my-3"/>
+				<div class="form-group">
+					<input type="text" name="end_rua" class="form-control" th:field="*{endereco.rua}" placeholder="Rua">
+					<input type="text" name="end_numero" class="form-control" th:field="*{endereco.numero}" placeholder="Número">
+				</div>				
+				<hr class="my-3"/>
+				<div class="form-group">
+					<input type="text" name="tel_numero" class="form-control" th:field="*{telefones[0].numero}" placeholder="Número de Telefone">
+				</div>
+				<hr class="my-3"/>				
+	            <div class="form-group">
+	                <label for="foto">Foto: </label>
+	                <input class="form-control-file"  type="file"  name="file" id="foto" placeholder="Foto"/>
+	            </div>
+				<hr class="my-3"/>
+				<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+</section>
