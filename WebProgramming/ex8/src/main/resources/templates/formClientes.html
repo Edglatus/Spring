@@ -15,16 +15,21 @@
 				<div class="form-group">
 					<input type="hidden" name="id" th:field="*{id}">
 					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<p class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</p>
 					<input type="date" name="dtNasc" class="form-control" th:field="*{dtNasc}" placeholder="Data de Nascimento">
+					<p class="text-danger" th:if="${#fields.hasErrors('dtNasc')}" th:errors="*{dtNasc}">Birthdate Error</p>
 				</div>
 				<hr class="my-3"/>
 				<div class="form-group">
 					<input type="text" name="end_rua" class="form-control" th:field="*{endereco.rua}" placeholder="Rua">
+					<p class="text-danger" th:if="${#fields.hasErrors('endereco.rua')}" th:errors="*{endereco.rua}">Street Error</p>
 					<input type="text" name="end_numero" class="form-control" th:field="*{endereco.numero}" placeholder="Número">
+					<p class="text-danger" th:if="${#fields.hasErrors('endereco.numero')}" th:errors="*{endereco.numero}">Number Error</p>
 				</div>				
 				<hr class="my-3"/>
 				<div class="form-group">
 					<input type="text" name="tel_numero" class="form-control" th:field="*{telefones[0].numero}" placeholder="Número de Telefone">
+					<p class="text-danger" th:if="${#fields.hasErrors('telefones[0].numero')}" th:errors="*{telefones[0].numero}">Telephone Error</p>
 				</div>
 				<hr class="my-3"/>				
 	            <div class="form-group">

@@ -1,7 +1,7 @@
-package com.ex7.demo.repository;
+package com.ex8.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ex7.demo.model.Telefone;
+import com.ex8.demo.model.Telefone;
 
 public interface TelefoneRepository extends JpaRepository<Telefone, Long> { }

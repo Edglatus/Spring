@@ -1,12 +1,17 @@
-package com.ex7.demo.model;
+package com.ex8.demo.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Embeddable
 public class Endereco 
 {
-	//Attributes	
-	private String rua;	
+	//Attributes
+	@NotBlank(message="O nome da rua não deve estar em branco")
+	private String rua;
+	
+	@Positive(message="O número da casa deve ser positivo.")
 	private int numero;
 	
 	//Get-Set

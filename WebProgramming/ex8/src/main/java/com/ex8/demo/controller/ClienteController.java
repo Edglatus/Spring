@@ -1,4 +1,4 @@
-package com.ex7.demo.controller;
+package com.ex8.demo.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -6,9 +6,11 @@ import java.util.Calendar;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ex7.demo.model.Cliente;
-import com.ex7.demo.repository.ClienteRepository;
+import com.ex8.demo.model.Cliente;
+import com.ex8.demo.repository.ClienteRepository;
 
 @Controller @RequestMapping("/cliente")
 public class ClienteController 
@@ -79,9 +81,10 @@ public class ClienteController
 	}	
 	
 	@PostMapping("/cadastrar")
-	public String addCliente(@RequestParam("file") MultipartFile file, @RequestParam("image") MultipartFile image, Cliente entity)
+	public String addCliente(@RequestParam("file") MultipartFile file, @RequestParam("image") MultipartFile image, 
+								@Valid Cliente entity, BindingResult bR)
 	{
-		if (image.isEmpty() || file.isEmpty())
+		if (image.isEmpty() || file.isEmpty() || bR.hasErrors())
 		{
 			return "formClientes";
 		}

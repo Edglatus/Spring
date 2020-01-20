@@ -1,4 +1,4 @@
-package com.ex7.demo.controller;
+package com.ex8.demo.controller;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

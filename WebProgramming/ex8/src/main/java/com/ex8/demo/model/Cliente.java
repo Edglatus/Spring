@@ -1,4 +1,4 @@
-package com.ex7.demo.model;
+package com.ex8.demo.model;
 
 import java.util.Calendar;
 import java.util.List;
@@ -16,6 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,10 +31,12 @@ public class Cliente
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Temporal(TemporalType.DATE) @DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE) @DateTimeFormat(pattern = "yyyy-MM-dd") @Past(message="Data inválida.")
 	private Calendar dtNasc;
 	
+	@NotBlank(message="O nome não deve estar em branco.")
 	private String nome;
+	
 	private String foto;
 	private String curriculum;
 	
@@ -37,10 +44,10 @@ public class Cliente
 	@AttributeOverrides({
 	  @AttributeOverride(name="rua", column=@Column(name="endereco_rua")),
 	  @AttributeOverride(name="numero", column=@Column(name="endereco_numero"))
-	})
+	}) @NotNull @Valid 
 	private Endereco endereco;
 	
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true) @JoinColumn(name="fk_cliente")
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true) @JoinColumn(name="fk_cliente") @NotEmpty @Valid
 	private List<Telefone> telefones;
 	
 	//Get-Set

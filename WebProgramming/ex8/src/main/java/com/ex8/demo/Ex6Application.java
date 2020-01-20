@@ -1,4 +1,4 @@
-package com.ex7.demo;
+package com.ex8.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
