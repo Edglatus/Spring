@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Cadastrar Cliente</h1>
+		</div>
+		<div class="card-body">
+			<form class="form" method="POST" enctype="multipart/form-data"
+			 th:object="${cliente}" th:action="@{/cliente/cadastrar}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{nome}" placeholder="Nome">
+					<p class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</p>
+					<input type="date" name="dtNasc" class="form-control" th:field="*{dtNasc}" placeholder="Data de Nascimento">
+					<p class="text-danger" th:if="${#fields.hasErrors('dtNasc')}" th:errors="*{dtNasc}">Birthdate Error</p>
+				</div>
+				<hr class="my-3"/>
+				<div class="form-group">
+					<input type="text" name="end_rua" class="form-control" th:field="*{endereco.rua}" placeholder="Rua">
+					<p class="text-danger" th:if="${#fields.hasErrors('endereco.rua')}" th:errors="*{endereco.rua}">Street Error</p>
+					<input type="text" name="end_numero" class="form-control" th:field="*{endereco.numero}" placeholder="Número">
+					<p class="text-danger" th:if="${#fields.hasErrors('endereco.numero')}" th:errors="*{endereco.numero}">Number Error</p>
+				</div>				
+				<hr class="my-3"/>
+				<div class="form-group">
+					<input type="text" name="tel_numero" class="form-control" th:field="*{telefones[0].numero}" placeholder="Número de Telefone">
+					<p class="text-danger" th:if="${#fields.hasErrors('telefones[0].numero')}" th:errors="*{telefones[0].numero}">Telephone Error</p>
+				</div>
+				<hr class="my-3"/>				
+	            <div class="form-group">
+	                <label for="foto">Foto: </label>
+	                <input class="form-control-file"  type="file" name="image" id="foto" placeholder="Foto"/>
+	            </div>				
+	            <div class="form-group">
+	                <label for="file">Curriculum Vitae: </label>
+	                <input class="form-control-file"  type="file" name="file" id="file" placeholder="CV"/>
+	            </div>
+				<hr class="my-3"/>
+				<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+</section>
