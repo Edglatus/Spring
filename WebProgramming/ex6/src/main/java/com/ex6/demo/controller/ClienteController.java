@@ -58,7 +58,7 @@ public class ClienteController
 		try 
 		{
 			String name = Calendar.getInstance().getTimeInMillis() + file.getOriginalFilename();
-			Path destination = Paths.get("C:\\Users\\Edgla\\Pictures\\" + name);
+			Path destination = Paths.get(context.getRealPath("resources/uploads/images/") + name);
 			file.transferTo(destination);
 			
 			entity.setFoto(context.getContextPath() + "/files/" + name);

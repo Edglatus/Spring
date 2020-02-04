@@ -89,13 +89,13 @@ public class ClienteController
 		try 
 		{
 			String imageName = Calendar.getInstance().getTimeInMillis() + image.getOriginalFilename();
-			Path imageDestination = Paths.get("C:\\Users\\Edgla\\Documents\\" + imageName);
+			Path imageDestination = Paths.get(context.getRealPath("resources/uploads/images/") + imageName);
 			image.transferTo(imageDestination);
 			
 			entity.setFoto(context.getContextPath() + "/images/" + imageName);
 			
 			String fileName = Calendar.getInstance().getTimeInMillis() + file.getOriginalFilename();
-			Path fileDestination = Paths.get("C:\\Users\\Edgla\\Documents\\" + fileName);
+			Path fileDestination = Paths.get(context.getRealPath("resources/uploads/documents/") + fileName);
 			file.transferTo(fileDestination);
 			
 			entity.setCurriculum(context.getContextPath() + "/files/" + fileName);
