@@ -3,11 +3,13 @@ package com.ex9.demo.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+@Entity
 public class Authorization implements Serializable {
 	//Serial
 	private static final long serialVersionUID = -6346599501215016101L;
