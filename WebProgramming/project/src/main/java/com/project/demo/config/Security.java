@@ -24,7 +24,7 @@ public class Security extends WebSecurityConfigurerAdapter{
 		http.formLogin()
 			.loginPage("/login")
 			.loginProcessingUrl("/login")
-			.successForwardUrl("/produtos")
+			.successForwardUrl("/products")
 			.and()
 			.authorizeRequests()
 			.antMatchers(HttpMethod.GET, "*/create/*", "*/alter/*", "*/delete/*").hasAuthority("ADMIN")

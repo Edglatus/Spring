@@ -24,7 +24,7 @@ public class FileController {
 
         if (Files.exists(image)) {
             res.setHeader("Content-Disposition", "inline");
-            res.setContentType(MediaType.IMAGE_PNG_VALUE);
+            res.setContentType(MediaType.IMAGE_JPEG_VALUE);
             try {
                 Files.copy(image, res.getOutputStream());
                 res.getOutputStream().flush();
