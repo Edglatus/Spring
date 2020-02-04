@@ -17,7 +17,7 @@ public class Authorization {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank @Valid
+	@NotBlank
 	private String name;	
 	
 	@ManyToMany(mappedBy="autorizations") @Valid @NotEmpty

@@ -8,12 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Product {
@@ -21,22 +22,22 @@ public class Product {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Valid @NotBlank
+	@NotBlank
 	private String name;
 	
-	@Valid @NotBlank
+	@NotBlank
 	private String description;
 	
-	@Valid  @NotNull
+	@NotNull
 	private int stockQtty; 
 	
-	@Valid @Digits(integer=4,fraction=2)
+	@Digits(integer=4,fraction=2)
 	private float price;
 	
-	@Valid @PastOrPresent @Temporal(TemporalType.DATE)
+	@PastOrPresent @Temporal(TemporalType.DATE) @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Calendar releaseDate;
 	
-	@Valid @NotEmpty
+	@NotEmpty
 	private String imagePath;
 	
 	//Get-Set

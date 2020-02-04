@@ -18,9 +18,9 @@ public class BaseUser {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank @Valid
+	@NotBlank
 	private String username;	
-	@NotBlank @Valid
+	@NotBlank
 	private String password;
 	
 	@ManyToMany(fetch=FetchType.EAGER) @NotEmpty @Valid
