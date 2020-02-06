@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Stock Manager</title>
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap-theme.min.css}" rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<div class="navbar-header" >
+				<a class="navbar-brand" th:href="@{/}">Stock Manager</a>
+			</div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">				
+					 <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href='@{/login}'>Login</a> </li>
+	                 <li class="nav-item" sec:authorize="isAuthenticated()" ><a class="nav-link" th:href='@{/products}'>Lista de Produtos</a> </li>
+	                 <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href='@{/products/create}'>Cadastrar Produtos</a> </li>
+	                 <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href='@{/users}'>Lista de Usuários</a> </li>
+	                 <li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" th:href='@{/users/create}'>Cadastrar Usuários</a> </li>
+				</ul>
+				<ul class="navbar-nav" sec:authorize="isAuthenticated()" id="loginInfo">	            
+		            <li class="nav-item nav-link disabled" sec:authentication="name" ></li>
+		            <li><a class="nav-item nav-link" th:href="@{/logout}">LOGOUT</a></li>
+	            </ul>
+			</div>		
+		</div>
+	</nav>
+
+	<section layout:fragment="content">
+	</section>
+</body>
+
+</html>

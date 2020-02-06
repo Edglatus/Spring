@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+		layout:decorator="defaultLayout">
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Lista de Produtos</h1>
+			<div>
+	            <form class="form-inline" th:action="@{''}" method="POST">
+	                <span class="glyphicon glyphicon-search"></span>
+	                <input class="form-control" type="text" name="name" th:object="${name}"/>
+	                <input class="btn btn-primary" type="submit" name="search"/>
+	            </form>
+	        </div>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th/>
+						<th>Nome</th>						
+						<th>Descrição</th>
+						<th>Quantidade</th>
+						<th>Preço</th>
+						<th>Data de Lançamento</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p: ${products}" >
+						<td> <img height=45px th:src="@{'~/'+${p.imagePath}}"/> </td>
+						<td th:text="${p.name}">nome</td>
+						<td th:text="${p.description}">descrição</td>
+						<td th:text="${p.stockQtty}">quantidade</td>
+						<td th:text="${p.price}">preço</td>
+						<td th:text="${#dates.format(p.releaseDate, 'dd/MM/yyyy')}">data</td>
+						<td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/products/alter/}+${p.id}">Alterar</a></td>						
+						<td><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/products/delete/}+${p.id}">Excluir</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+		layout:decorator="defaultLayout">
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Lista de Usuários</h1>
+			<div>
+	            <form class="form-inline" th:action="@{''}" method="POST">
+	                <span class="glyphicon glyphicon-search"></span>
+	                <input class="form-control" type="text" name="name" th:object="${name}"/>
+	                <input class="btn btn-primary" type="submit" name="search"/>
+	            </form>
+	        </div>
+		</div>
+		<div class="card-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nome</th>						
+						<th>Autorizações</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u: ${users}" >
+						<td th:text="${u.username}">nome</td>
+						<th:block th:each="a: ${u.authorizations}"><td th:text="${a.name}"><td></th:block>
+						<td><a th:href="@{/users/alter/}+${u.id}">Alterar</a></td>						
+						<td><a th:href="@{/users/delete/}+${u.id}">Excluir</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>

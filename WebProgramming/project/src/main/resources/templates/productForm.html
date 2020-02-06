@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Cadastrar Produto</h1>
+		</div>
+		<div class="card-body">
+			<form class="form" method="POST" enctype="multipart/form-data"
+			 th:object="${product}" th:action="@{${#httpServletRequest.requestURI}}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{name}" placeholder="Nome">
+					<p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+					
+					<input type="text" name="desc" class="form-control" th:field="*{description}" placeholder="Descrição">
+					<p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</p>
+					
+					<input type="text" name="price" class="form-control" th:field="*{price}" placeholder="preço">
+					<p class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</p>
+					
+					<input type="text" name="qtty" class="form-control" th:field="*{stockQtty}" placeholder="Quantidade">
+					<p class="text-danger" th:if="${#fields.hasErrors('stockQtty')}" th:errors="*{stockQtty}">Quantity Error</p>
+					
+					<input type="date" name="releaseDate" class="form-control" th:field="*{releaseDate}" placeholder="Data de Lançamento">
+					<p class="text-danger" th:if="${#fields.hasErrors('releaseDate')}" th:errors="releaseDate">Releasedate Error</p>
+				</div>
+				<hr class="my-3"/>				
+	            <div class="form-group">
+	                <label for="foto">Foto: </label>
+	                <input class="form-control-file"  type="file" name="image" id="image" placeholder="Foto"/>
+	                <p class="text-danger" th:text="${imgError}">text<p>
+	            </div>
+				<hr class="my-3"/>
+				<button type="submit" name="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+	</div>
+</section>

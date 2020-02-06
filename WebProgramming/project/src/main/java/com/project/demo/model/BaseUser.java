@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
+@Entity@Table(name="user")
 public class BaseUser {
 	//Attributes
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class BaseUser {
 	@NotBlank
 	private String password;
 	
-	@ManyToMany(fetch=FetchType.EAGER) @NotEmpty @Valid
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Authorization> authorizations;
 
 	//Get-Set

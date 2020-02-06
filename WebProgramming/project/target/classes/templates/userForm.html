@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="defaultLayout" >
+	
+<section layout:fragment="content">
+	<div class="card" style="margin: 10px">
+		<div class="card-header">
+			<h1 class="card-title">Cadastrar Usuário</h1>
+		</div>
+		<div class="card-body">
+			<form class="form" method="POST" enctype="form-data"
+			 th:object="${user}" th:action="@{${#httpServletRequest.requestURI}}">
+				<div class="form-group">
+					<input type="hidden" name="id" th:field="*{id}">
+					<input type="text" name="nome" class="form-control" th:field="*{username}" placeholder="Nome">
+					<p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>
+					
+					<input type="password" name="password" class="form-control" th:field="*{password}" placeholder="Password">
+					<p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
+				</div>
+				<hr class="my-3"/>				
+	            <div class="form-group">
+	                <label>Permissões: </label>
+					<th:block th:each="a :${authorizations}">
+						<div class="form-check">
+							<br>
+							<input class="form-check-input" type="checkbox" name="auths" th:value="${a.id}" th:checked="${user.authorizations.contains(a)}"/>
+		   					<label class="form-check-label" th:text="${a.name}">auth</label>
+		   				</div>
+					</th:block>					
+					<p class="text-danger" th:if="${#fields.hasErrors('authorizations')}" th:errors="*{authorizations}">Password Error</p>
+					<p class="text-danger" th:if="${#fields.hasErrors('authorizations')}" th:errors="*{authorizations}">Password Error</p>
+	            </div>
+				<hr class="my-3"/>
+				<button type="submit" name="submit" class="btn btn-primary">Enviar</button>	
+			</form>
+		</div>
+	</div>
+</section>

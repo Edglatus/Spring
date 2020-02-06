@@ -2,6 +2,7 @@ package com.project.demo.model;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,15 +28,16 @@ public class Product {
 	@NotBlank
 	private String description;
 	
-	@NotNull
+	@NotNull @Column(name="stock_quantity")
 	private int stockQtty; 
 	
 	@Digits(integer=4,fraction=2)
 	private float price;
 	
-	@PastOrPresent @Temporal(TemporalType.DATE) @DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent @Temporal(TemporalType.DATE) @DateTimeFormat(pattern = "yyyy-MM-dd") @Column(name="release_date")
 	private Calendar releaseDate;
 	
+	@Column(name="image_path")
 	private String imagePath;
 	
 	//Get-Set

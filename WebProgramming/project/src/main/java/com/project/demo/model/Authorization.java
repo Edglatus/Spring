@@ -20,7 +20,7 @@ public class Authorization {
 	@NotBlank
 	private String name;	
 	
-	@ManyToMany(mappedBy="autorizations") @Valid @NotEmpty
+	@ManyToMany(mappedBy="authorizations") @Valid @NotEmpty
 	private List<BaseUser> users;
 	
 	//Get-Set

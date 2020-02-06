@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
@@ -57,8 +59,8 @@ public class ProductController {
 		return "productList";
 	}
 	
-	@GetMapping("/{name}")
-	public String searchByName(@PathVariable String name, Model model) {
+	@PostMapping(params="name")
+	public String searchByName(@RequestParam String name, Model model) {
 		List<Product> list = repo.findByNameLike(name);
 		
 		if(!list.isEmpty()) {
@@ -76,11 +78,11 @@ public class ProductController {
 	}
 	
 	@PostMapping("/create")
-	public String addOne(@Valid @ModelAttribute Product entity, @RequestParam("image") MultipartFile img,
-							BindingResult bR, Model model) throws ResponseStatusException {
+	public String addOne(@Valid @ModelAttribute Product entity, BindingResult bR, @RequestParam("image") MultipartFile img, Model model){
 		if (bR.hasErrors())	{
 			return "productForm";
-		}		
+		}
+		
 		if (img.isEmpty()) {
             model.addAttribute("imgError", "No File Uploaded");
             return "productForm";
@@ -91,16 +93,17 @@ public class ProductController {
 		
 		try {
 			String imageName = Calendar.getInstance().getTimeInMillis() + img.getOriginalFilename();
-			Path imageDestination = Paths.get(context.getRealPath("resources/uploads/images/") + imageName);
+			Path imageDestination = Paths.get("src/main/resources/uploads/" + imageName);
 			img.transferTo(imageDestination);
 			
 			entity.setImagePath(context.getContextPath() + "/images/" + imageName);
 		} catch(Exception e) {
+			Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, e);
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 		
 		repo.save(entity);
-		return "redirect: /products";
+		return "redirect:../products";
 	}
 	
 	//Update
@@ -117,30 +120,40 @@ public class ProductController {
 	}
 	
 	@PostMapping("/alter/{id}")
-	public String alterOne(@Valid @ModelAttribute Product entity, @RequestParam("image") MultipartFile img,
-							BindingResult bR, Model model) throws ResponseStatusException {
+	public String alterOne(@Valid @ModelAttribute Product entity, BindingResult bR, @RequestParam("image") MultipartFile img,
+							 Model model, @PathVariable long id) throws ResponseStatusException {
+		Optional<Product> found = repo.findById(id);
+		
 		if (bR.hasErrors())	{
 			return "productForm";
 		}
-        if (!img.getContentType().equals(MediaType.IMAGE_JPEG_VALUE)) {
-            model.addAttribute("imgError", "Unsupported Filetype");
-            return "productForm";
-        }
 		
-        if (!img.isEmpty()) {
+		if(!found.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		}		
+		
+		if (!img.isEmpty()) {
+	        if (!img.getContentType().equals(MediaType.IMAGE_JPEG_VALUE)) {
+	            model.addAttribute("imgError", "Unsupported Filetype");
+	            return "productForm";
+	        }
+		
 			try {
 				String imageName = Calendar.getInstance().getTimeInMillis() + img.getOriginalFilename();
-				Path imageDestination = Paths.get(context.getRealPath("resources/uploads/images/") + imageName);
+				Path imageDestination = Paths.get("src/main/resources/uploads/" + imageName);
 				img.transferTo(imageDestination);
 				
 				entity.setImagePath(context.getContextPath() + "/images/" + imageName);
 			} catch(Exception e) {
+				Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, e);
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 			}
+        } else {
+        	entity.setImagePath(found.get().getImagePath());
         }
 		
 		repo.save(entity);
-		return "redirect: /products";
+		return "redirect:../../products";
 	}
 	
 	//Delete
@@ -153,6 +166,6 @@ public class ProductController {
 		}
 		
 		repo.delete(entity.get());		
-		return "redirect: /products";
+		return "redirect:../../products";
 	}
 }
