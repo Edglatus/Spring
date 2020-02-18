@@ -1,0 +1,27 @@
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<body>
+	<h1>Funcionarios</h1>
+		<p> <a th:href="@{/create}"> Adicionar </a> </p>
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Cargo</th>
+					<th>Salario</th>
+					<th>CPF</th>
+					<th>Telefone</th>
+				</tr>
+			</thead>
+			<tr th:each="f : ${funcionarios}">
+				<td th:text="${f.nome}">nome</td>
+				<td th:text="${f.cargo}">cargo</td>
+				<td th:text="${f.salario}">salario</td>
+				<td th:text="${f.cpf}">cpf</td>
+				<td th:text="${f.telefone}">telefone</td>
+				<td> <a th:href="@{/update} + '/' + ${f.codigo}"> Editar </a>  </td>
+				<td> <a th:href="@{/delete} + '/' + ${f.codigo}"> Excluir </a> </td>
+			</tr>
+		</table>
+	</body>
+</html>
